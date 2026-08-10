@@ -1,0 +1,43 @@
+const marketplaces = [
+  { icon: <FaAmazon className="text-orange-400" />, name: "Amazon", width: "75%" },
+  { icon: <FaStore className="text-blue-400" />, name: "Walmart", width: "60%" },
+  { icon: <FaShoppingCart className="text-yellow-400" />, name: "eBay", width: "50%" },
+  { icon: <FaShopify className="text-green-400" />, name: "Shopify", width: "65%" },
+];
+
+{/* Total Sales card — top left */}
+<div className="absolute top-2 left-0 bg-white rounded-2xl shadow-xl p-3 w-36">
+  <p className="text-gray-400 text-[10px] font-semibold mb-1">Total Sales</p>
+  <p className="text-gray-900 text-lg font-black">$8.45M</p>
+  <p className="text-green-500 text-[10px] font-bold mb-2">↑ 15.6%</p>
+            
+  {/* Mini sparkline */}
+  <svg viewBox="0 0 80 24" className="w-full h-5">
+    <polyline points="0,20 15,14 30,16 45,8 60,10 80,2" fill="none" stroke="#22c55e" strokeWidth="2"
+    strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+</div> 
+
+{/* Marketplaces card — bottom center-left */}
+<div className="absolute bottom-0 left-4 bg-white rounded-2xl shadow-xl p-3 md:h-auto md:w-44 w-32 h-32">
+  <p className="text-gray-400 text-[10px] font-semibold mb-2">Top Marketplaces</p>
+  
+  <div className="flex flex-col gap-1.5">
+    {marketplaces.map((m) => (
+
+      <div key={m.name} className="flex items-center gap-2">
+        <span className="text-sm flex-shrink-0">{m.icon}</span>
+        <div className="flex-1 bg-gray-100 rounded-full h-1.5 overflow-hidden">
+          <div className="h-full bg-pink-500 rounded-full" style={{ width: m.width }}/>
+        </div>
+        <span className="text-[9px] text-gray-500 w-8 text-right">{m.name}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+{/* Years badge — bottom right */}
+<div className="absolute bottom-4 right-0 w-20 h-20 rounded-full bg-pink-600 flex flex-col items-center justify-center text-white shadow-lg shadow-pink-600/40">
+  <span className="text-2xl font-black leading-none">10+</span>
+  <span className="text-[9px] font-semibold text-center leading-tight mt-0.5">Years of<br/>Experience</span>
+</div>
