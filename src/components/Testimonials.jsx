@@ -89,14 +89,14 @@ const Testimonials = () => {
                 {/* Top gradient line on hover */}
                 <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                <img src={review.imgSrc} alt={review.caption} className="md:h-44 w-1/2 h-40 object-cover rounded-full hover:shadow-2xl" />
+                <img src={review.imgSrc} alt={review.caption} className="md:h-24 w-1/4 h-20 object-cover rounded-full" />
                 <div className="text-xl">{review.icon}</div>
-                <h3 className="roboto text-white text-xl">{review.title}</h3>
-                <p className="open-sans text-white/75 px-3">“{review.desc[0]}”</p>
+                <h3 className="roboto text-white">{review.title}</h3>
+                <p className="open-sans text-white/75 px-3 text-sm">“{review.desc[0]}”</p>
 
                 <div className="text-lg text-white"> 
                   <div className="roboto font-semibold">{review.name}</div>
-                  <div className="open-sans">{review.designation}</div>
+                  <div className="open-sans text-sm">{review.designation}</div>
                 </div>
 
                 {/* Bottom gradient underline */}
