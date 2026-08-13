@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
+import { FaArrowRight } from "react-icons/fa6";
 
 const reviews = [
   {
@@ -46,41 +48,101 @@ const reviews = [
 ]
 
 const Testimonials = () => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const totalReviews = reviews.length
+
+  const prevSlide = () => setCurrentIndex((currentIndex + totalReviews - 1) % totalReviews)
+  const nextSlide = () => setCurrentIndex((currentIndex + 1) % totalReviews)
+
   return (
-    <>
-    <section className="bg-[#0a0f1e] py-12 px-5 md:px-8">
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Fraunces:wght@900&display=swap');
-      .ff { font-family: 'Fraunces', serif; }`}</style>
+    <section className="md:p-10 py-8 px-4">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+          .roboto { font-family: 'Roboto', sans-serif; font-weight: 700; }
+          .open-sans { font-family: 'Open Sans', sans-serif; font-weight: 400; }
+      `}</style>
 
-      <h2 className="ff text-gray-300 lg:text-[5vh] text-[2.7vh] text-center font-semibold">
-        <span className="text-amber-400">What Our</span> Clients Say
+      <h2 className="roboto text-4xl sm:text-4xl text-white text-center font-extrabold leading-tight tracking-tight">
+        <span className="text-pink-400">What Our</span> Clients Say
       </h2>
-           
-          <div className="py-5"></div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto gap-5">
-        {reviews.map((rvs, index) => ( 
-          
-          <div 
-            key={index} 
-            className="bg-white/5 p-5 border border-cyan-400 rounded-xl space-y-4
-            hover:shadow-[0_0_20px_rgba(34,211,238,0.6)] transition-shadow duration-300">
-            
-            <img src={rvs.imgSrc} alt="" className="lg:w-1/2 lg:h-[25vh] h-32 sm:h-32 object-cover rounded-full hover:shadow-2xl"/>
-            <div className="">{rvs.icon}</div>
-            <h3 className="text-white text-xl">{rvs.title}</h3>
-            <p className="text-white/60 px-3">"{rvs.desc}"</p>
+      <div className="py-4"></div>
 
-            <div className="text-lg text-white">
-              <span className="">{rvs.name} <br /></span>
-              <span className="text-sm">{rvs.designation}</span>
-            </div>         
-          </div>
+      <div className="max-w-7xl mx-auto relative">
+        <button
+          onClick={prevSlide}
+          className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-pink-500/80 p-3 text-white shadow-lg shadow-pink-500/20 hover:bg-pink-400 focus:outline-none"
+          aria-label="Previous testimonials"
+        >
+          ‹
+        </button>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          {Array.from({ length: 3 }).map((_, visibleIndex) => {
+            const review = reviews[(currentIndex + visibleIndex) % reviews.length]
+
+            return (
+              <div
+                key={review.id}
+                className={`relative group bg-white/5 p-5 border border-pink-400 rounded-xl space-y-4 transition-shadow duration-300 hover:shadow-[0_0_20px_rgba(236,72,153,0.6)] ${visibleIndex === 0 ? 'block' : 'hidden lg:block'}`}
+              >
+                {/* Top gradient line on hover */}
+                <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-amber-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                <img src={review.imgSrc} alt={review.caption} className="md:h-44 w-1/2 h-40 object-cover rounded-full hover:shadow-2xl" />
+                <div className="text-xl">{review.icon}</div>
+                <h3 className="roboto text-white text-xl">{review.title}</h3>
+                <p className="open-sans text-white/75 px-3">“{review.desc[0]}”</p>
+
+                <div className="text-lg text-white"> 
+                  <div className="roboto font-semibold">{review.name}</div>
+                  <div className="open-sans">{review.designation}</div>
+                </div>
+
+                {/* Bottom gradient underline */}
+                <span className="absolute bottom-0 left-4 h-[1.5px] w-0 bg-gradient-to-r from-amber-400 to-cyan-400 rounded-full transition-all duration-300 group-hover:w-[calc(100%-2rem)]" />
+              </div>
+            )
+          })}
+        </div>
+
+        <button
+          onClick={nextSlide}
+          className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-pink-500/80 p-3 text-white shadow-lg shadow-pink-500/20 hover:bg-pink-400 focus:outline-none"
+          aria-label="Next testimonials"
+        >
+          ›
+        </button>
+      </div>
+
+      <div className="flex items-center justify-center gap-4 my-8">
+        {reviews.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`h-3 w-3 rounded-full transition-colors ${index === currentIndex ? 'bg-pink-400' : 'bg-white/30 hover:bg-white/60'}`}
+            aria-label={`Show testimonial group starting at ${index + 1}`}
+          />
         ))}
       </div>
+      
+      {/* CTA */} 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-violet-600 py-10 px-5 rounded-lg"
+        style={{ background: "linear-gradient(135deg, #4a109b 0%, #670dbc 30%, #F544A8 100%)" }}>
+      
+        <div className="roboto md:text-left text-center text-white/100">    
+          <h2 className="text-2xl">Ready to Grow Your Business?</h2>
+          <p className="text-lg text-gray-300">Let's build something amazing together.</p>
+        </div>
+              
+        <div className="open-sans flex justify-center">
+          <Link to="/contact" className="flex py-3 justify-center border w-48 rounded-md">
+            <div className="text-white flex items-center justify-center gap-2 font-semibold">Learn More <FaArrowRight/></div>
+          </Link>
+        </div> 
+      </div>
     </section>
-    </>
-  );
+  )
 }
 
 export default Testimonials

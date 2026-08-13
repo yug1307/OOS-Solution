@@ -37,7 +37,7 @@ export default function Footer() {
           .body { font-family: 'Inter', sans-serif; }
           .heading { font-family: 'Roboto', sans-serif; }
           .content { font-family: 'Open Sans', sans-serif; }
-          .nl:hover::after { transform: scaleX(1); }
+          .nl:hover::after { transform: scaleX(1); } 
       `}</style>
 
       {/* ── Main Footer Body ── */}
@@ -94,15 +94,10 @@ export default function Footer() {
 
           <div className="flex items-center gap-3">
             {socialLinks.map((s) => (
-              <a
-                key={s.id}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group"
+              <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" className="group"
               >
                 <div
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center text-white bg-[#F544A8] transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-1 group-hover:shadow-lg ${s.hoverClass}`}
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center text-white bg-[#F544A8] transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-1 group-hover:shadow-lg ${s.hoverClass}`}
                 >
                   {s.icon}
                 </div>

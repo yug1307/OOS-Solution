@@ -30,7 +30,7 @@ function ServicesMenu() {
       </button>
 
       {open && (
-        <div className="absolute top-full left-0 mt-3 w-60 bg-[#060730] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50">
+        <div className="absolute top-full left-0 right-10 mt-3 w-60 bg-[#060730] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50">
           {services.map((s) => (
             <Link key={s.title} to={s.href} onClick={() => setOpen(false)}
               className="block px-4 py-2.5 hover:text-pink-400 hover:bg-white/5 transition-colors">
@@ -49,19 +49,15 @@ export default function Header() {
   return (  
     <header className="w-full bg-[#060730] border-b border-gray-100 shadow-sm sticky top-0 z-50">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&family=Roboto:wght@700;900&family=Open+Sans:wght@400;500;600&display=swap');
-          .logo { font-family: 'Orbitron', sans-serif; }
-          .nav { font-family: 'Syne', sans-serif; }
-          .body { font-family: 'Inter', sans-serif; }
-          .heading { font-family: 'Roboto', sans-serif; }
-          .content { font-family: 'Open Sans', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700;900&display=swap');
+          .roboto { font-family: 'Roboto', sans-serif; }
           .nl:hover::after { transform: scaleX(1); }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 md:h-20 h-14 flex items-center justify-between">
 
         {/* ── LEFT: Logo ── */}
-        <img src="/images/logo.png" alt="" className="h-14" />
+        <img src="/images/logo.png" alt="" className="md:h-14 h-10" />
 
         {/* ── RIGHT: Nav Links (desktop) ── */}
         <nav className="nl roboto transition-colors hidden md:flex items-center space-x-6 text-white">

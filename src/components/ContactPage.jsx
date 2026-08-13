@@ -1,124 +1,238 @@
-import Header from "./Header";
-import Footer from "./Footer";
+import React, { useState } from 'react';
+import Header from './Header'
+import Footer from './Footer'
 
-export default function ContactPage() {
+const ContactPage = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: ''
+  });
 
-  const contacts = [
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-        </svg>
-      ),
-      label: "Phone", value: "+91 8551862600", sub: "Available Mon – Sat, 10 am – 6 pm", href: "tel:+918551862600",
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0-9.75 6.75L2.25 6.75" />
-        </svg>
-      ),
-      label: "Email", value: "sonwanehitesh85@gmail.com", 
-      sub: "Replies within 24 hours", href: "mailto:sonwanehitesh85@gmail.com",
-    },
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-        </svg>
-      ),
-      label: "Location",
-      value: "Shri Ram Nagar, Gondia, Maharashtra",
-      href: null,
-    },
-  ]
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+    setError('');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(data.message || 'Failed to submit form. Please check your input and try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setError('Unable to connect to server. Please ensure the backend is running on http://localhost:5000');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
     <Header/>
     <div className="min-h-screen flex flex-col" style={{ background: "#0d0b1a", fontFamily: "'Raleway', sans-serif" }}>
-      
-      <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap');
+        .roboto { font-family: 'Roboto', sans-serif; font-weight: 700; }
+        .open-sans { font-family: 'Open Sans', sans-serif; font-weight: 400; }
+      `}</style>
 
-      {/* Star field */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        {Array.from({ length: 70 }).map((_, i) => (
+      <section className="relative overflow-hidden py-16 px-4" style={{background: "radial-gradient(ellipse at 50% 0%, #2d1b4e 0%, #1a0f2e 50%, #0f0a1e 100%)"}}>
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h1 className="roboto text-white lg:text-5xl text-3xl font-bold mb-4">
+              Get In <span className="text-pink-400">Touch</span>
+            </h1>
 
-          <div key={i} className="absolute rounded-full bg-white"
-            style={{ width: `${(i * 0.037 % 1.8) + 0.4}px`, height: `${(i * 0.037 % 1.8) + 0.4}px`,
-            top: `${(i * 1.37)  % 100}%`, left: `${(i * 1.97)  % 100}%`, opacity: `${((i * 0.013) % 0.45) + 0.08}`, }}
-          />
-        ))}
-      </div>
-
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 py-20">
-        <div className="w-full max-w-2xl">
-
-          {/* Eyebrow */}
-          <p
-            className="text-center text-[11px] font-medium tracking-[0.25em] uppercase mb-4"
-            style={{ color: "#a07bd0" }}
-          >
-            Reach out
-          </p>
-
-          {/* Ornament */}
-          <div className="flex items-center gap-3 justify-center mb-8">
-            <div className="h-px w-12" style={{ background: "#3a2e6e" }} />
-            <div className="w-1.5 h-1.5 rotate-45" style={{ background: "#6b4fa0" }} />
-            <div className="h-px w-12" style={{ background: "#3a2e6e" }} />
+            <p className="open-sans text-gray-300 text-lg">
+              We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            </p>
           </div>
 
-          {/* Headline */}
-          <h1 className="text-center text-3xl sm:text-4xl leading-snug mb-4" style={{ fontFamily: "'Cinzel', serif", color: "#ede8ff", fontWeight: 600 }}>
-            Get{" "}
-            <span style={{ color: "#c49bff" }}>In Touch</span>
-          </h1>
+          {/* Success Message */}
+          {submitted && (
+            <div className="mb-8 p-4 bg-green-500/20 border border-green-500 rounded-lg">
+              <p className="text-green-400 text-center font-semibold">
+                Thank you! Your message has been sent successfully. We'll get back to you soon.
+              </p>
+            </div>
+          )}
 
-          {/* Sub-headline */}
-          <p className="text-center text-[15px] font-light leading-loose mb-14 max-w-lg mx-auto" style={{ color: "#b3a8d4" }}>
-            Have a project in mind? Let's talk and grow your business together.
-          </p>
+          {/* Error Message */}
+          {error && (
+            <div className="mb-8 p-4 bg-red-500/20 border border-red-500 rounded-lg">
+              <p className="text-red-400 text-center font-semibold">
+                {error}
+              </p>
+            </div>
+          )}
 
-          {/* Contact cards */}
-          <div className="flex flex-col gap-4 mb-14">
-            {contacts.map(({ icon, label, value, sub, href }) => {
-              const Card = (
-                <div className="flex items-start gap-5 rounded-2xl px-6 py-5 border" style={{ background: "#12102a", borderColor: "#2a2050" }}>
-                  <div className="mt-0.5 flex-shrink-0 p-2.5 rounded-xl" style={{ background: "#1e1840", color: "#c49bff" }}>
-                    {icon}
-                  </div>
-                  
-                  <div>
-                    <p className="text-[11px] font-medium tracking-widest uppercase mb-1" style={{ color: "#6b4fa0" }}>
-                      {label}
-                    </p>
+          {/* Contact Form */}
+          <form onSubmit={handleSubmit} className="bg-white/5 border border-pink-400/30 rounded-xl p-8 backdrop-blur-sm space-y-6">
+            
+            {/* Name and Email Row */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Name Field */}
+              <div className="relative">
+                <label htmlFor="name" className="block text-gray-300 font-semibold mb-2">
+                  Full Name <span className="text-pink-400">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="John Doe"
+                  className="w-full px-4 py-3 bg-white/10 border border-pink-400/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-pink-400 transition-colors duration-300"
+                />
+              </div>
 
-                    <p className="text-[16px] font-medium mb-0.5" style={{ color: "#ede8ff" }}>
-                      {value}
-                    </p>
+              {/* Email Field */}
+              <div className="relative">
+                <label htmlFor="email" className="block text-gray-300 font-semibold mb-2">
+                  Email Address <span className="text-pink-400">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="john@example.com"
+                  className="w-full px-4 py-3 bg-white/10 border border-pink-400/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-pink-400 transition-colors duration-300"
+                  />
+              </div>
+            </div>
 
-                    <p className="text-[13px] font-light" style={{ color: "#7a6ea0" }}>
-                      {sub}
-                    </p>
-                  </div>
-                </div>
-              );
+            {/* Phone Field */}
+            <div>
+              <label htmlFor="phone" className="block text-gray-300 font-semibold mb-2">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="+1 (555) 000-0000"
+                className="w-full px-4 py-3 bg-white/10 border border-pink-400/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-pink-400 transition-colors duration-300"
+              />
+            </div>
 
-              return href ? (
-                <a key={label} href={href} className="block no-underline hover:scale-[1.015] transition-transform duration-200">
-                  {Card}
-                </a>
-                ) : (
-                <div key={label}>{Card}</div>
-              );
-            })}
+            {/* Subject Field */}
+            <div>
+              <label htmlFor="subject" className="block text-gray-300 font-semibold mb-2">
+                Subject <span className="text-pink-400">*</span>
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                required
+                placeholder="How can we help you?"
+                className="w-full px-4 py-3 bg-white/10 border border-pink-400/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-pink-400 transition-colors duration-300"
+              />
+            </div>
+
+            {/* Message Field */}
+            <div>
+              <label htmlFor="message" className="block text-gray-300 font-semibold mb-2">
+                Message <span className="text-pink-400">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                placeholder="Tell us more about your project..."
+                rows="6"
+                className="w-full px-4 py-3 bg-white/10 border border-pink-400/30 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-pink-400 transition-colors duration-300 resize-none"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex justify-center pt-4">
+              <button
+                type="submit"
+                disabled={loading}
+                className="px-8 py-3 rounded-full font-semibold text-white transition-all duration-300 shadow-lg shadow-pink-500/20 hover:opacity-90 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{background: "linear-gradient(135deg, #f59e0b, #ef4444)"}}
+              >
+                {loading ? 'Sending...' : 'Send Message'}
+              </button>
+            </div>
+
+            {/* Form Note */}
+            <p className="open-sans text-gray-400 text-sm text-center pt-2">
+              We'll respond to your message within 24 hours.
+            </p>
+          </form>
+
+          {/* Contact Info Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            {/* Phone Card */}
+            <div className="bg-white/5 border border-pink-400/30 rounded-lg p-6 text-center hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] transition-shadow duration-300">
+              <div className="text-3xl mb-4">📞</div>
+              <h3 className="text-white font-bold text-lg mb-2">Call Us</h3>
+              <p className="text-gray-400">+1 (555) 000-0000</p>
+            </div>
+
+            {/* Email Card */}
+            <div className="bg-white/5 border border-pink-400/30 rounded-lg p-6 text-center hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] transition-shadow duration-300">
+              <div className="text-3xl mb-4">📧</div>
+              <h3 className="text-white font-bold text-lg mb-2">Email Us</h3>
+              <p className="text-gray-400">contact@oossolution.com</p>
+            </div>
+
+            {/* Location Card */}
+            <div className="bg-white/5 border border-pink-400/30 rounded-lg p-6 text-center hover:shadow-[0_0_20px_rgba(236,72,153,0.4)] transition-shadow duration-300">
+              <div className="text-3xl mb-4">📍</div>
+              <h3 className="text-white font-bold text-lg mb-2">Visit Us</h3>
+              <p className="text-gray-400">123 Business Street, City, Country</p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
     <Footer/>
     </>
   );
-}
+};
+
+export default ContactPage;

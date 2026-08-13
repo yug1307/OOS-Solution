@@ -27,7 +27,7 @@ const Methodology = () => {
             {/* <Figures/> */}
 
       {/* Our Process */} 
-      <section className="py-10 space-y-10">
+      <section className="py-10">
         <div className="md:px-10 px-4 rounded-xl space-y-6">
           
           {/* Eyebrow tag */}
@@ -40,7 +40,7 @@ const Methodology = () => {
             </div>
           </div>
 
-          <p className="roboto text-white text-center md:text-[3.8vh] text-4xl">Simple Steps, <span className="text-pink-400">Big Results</span></p>
+          <p className="roboto text-4xl sm:text-4xl text-white text-center font-extrabold leading-tight tracking-tight">Simple Steps, <span className="text-pink-400">Big Results</span></p>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 max-w-8xl mx-auto gap-4">
             {Process.map((steps, index) => (
@@ -68,23 +68,6 @@ const Methodology = () => {
                 <span className="absolute bottom-0 left-1/2 h-[1.5px] w-0 bg-gradient-to-r from-amber-400 to-cyan-400 rounded-full transition-all duration-300 group-hover:left-4 group-hover:w-[calc(100%-2rem)]" />
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* CTA */} 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-violet-600 py-10 md:px-5 mx-5 md:mx-5 rounded-lg"
-          style={{ background: "linear-gradient(135deg, #4a109b 0%, #670dbc 30%, #F544A8 100%)" }}>
-
-          <div className="roboto sm:text-left text-center text-white/100">
-
-            <h2 className="text-2xl">Ready to Grow Your Business?</h2>
-            <p className="text-lg text-gray-300">Let's build something amazing together.</p>
-          </div>
-        
-          <div className="open-sans flex justify-center">
-            <Link to="/contact" className="flex py-3 justify-center border w-48 rounded-md">
-              <div className="text-white flex items-center justify-center gap-2 font-semibold">Learn More <FaArrowRight/></div>
-            </Link>
           </div>
         </div>
       </section>

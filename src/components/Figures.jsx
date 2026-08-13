@@ -18,7 +18,7 @@ const Figures = () => {
         @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
           .content { font-family: 'Open Sans', sans-serif; }
       `}</style>  
-
+ 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {figures.map((fig, index) => (

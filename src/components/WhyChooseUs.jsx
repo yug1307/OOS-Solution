@@ -112,16 +112,16 @@ export default function WhyChooseUs() {
       <img
         src="/images/hero-2.png"
         alt=""
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 md:h-[103vh] h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-[#060730]/70" />
 
-      <div className="relative mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div className="relative mx-auto max-w-8xl py-8 px-4 md:px-12">
         {/* ── Top section: left content + right trust card ── */}
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
           {/* LEFT */}
-          <div className="flex-1 min-w-0">
+          <div className="">
             {/* Eyebrow */}
             <div className="open-sans inline-flex items-center gap-2 bg-pink-400/10 border border-pink-400/20 rounded-full px-4 py-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse" />
@@ -131,13 +131,13 @@ export default function WhyChooseUs() {
             </div>
 
             {/* Headline */}
-            <h2 className="roboto text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight my-5">
-              Your Growth is{" "}
+            <h2 className="roboto text-4xl sm:text-4xl font-extrabold leading-tight tracking-tight my-5">
+              Your Growth is{" "} 
               <span className="text-pink-500">Our Mission</span>
             </h2>
 
             {/* Body */}
-            <p className="open-sans text-slate-300 text-base text-lg leading-relaxed max-w-xl">
+            <p className="open-sans text-slate-300 text-base leading-relaxed max-w-xl">
               We don't just deliver services—we build long-term partnerships. We combine
               technology, creativity, expertise, and a customer-first approach to help
               businesses grow with confidence.
@@ -146,7 +146,7 @@ export default function WhyChooseUs() {
             {/* Checklist */}
             <ul className="space-y-3 my-5">
               {checkItems.map((item) => (
-                <li key={item} className="open-sans flex items-start gap-3 text-slate-200 text-lg">
+                <li key={item} className="open-sans flex items-start gap-3 text-slate-200">
                   <CheckIcon />
                   {item}
                 </li>
@@ -155,14 +155,14 @@ export default function WhyChooseUs() {
 
             {/* CTA Buttons */}
             <div className="open-sans flex flex-wrap gap-4">
-              <button className="inline-flex items-center gap-2 rounded-lg bg-pink-600 hover:bg-pink-500 transition-colors px-6 py-3 text-lg font-bold text-white shadow-lg shadow-pink-900/40">
+              <button className="inline-flex items-center gap-2 rounded-lg bg-pink-600 hover:bg-pink-500 transition-colors px-6 py-3 font-bold text-white shadow-lg shadow-pink-900/40">
                 Learn More
                 <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M2 8h12M9 3l5 5-5 5" />
                 </svg>
               </button>
 
-              <button className="inline-flex items-center gap-2 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/5 transition-colors px-6 py-3 text-lg font-bold text-white">
+              <button className="inline-flex items-center gap-2 rounded-lg border border-white/25 hover:border-white/50 hover:bg-white/5 transition-colors px-6 py-3 font-bold text-white">
                 Let's Talk
                 <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M3 13L13 3M6 3h7v7" />
@@ -172,10 +172,10 @@ export default function WhyChooseUs() {
           </div>
 
           {/* RIGHT — trust card + feature cards */}
-          <div className="flex-1 min-w-0 flex flex-col gap-5 w-full lg:max-w-[55%]">
+          <div className="space-y-6">
             {/* Trust card */}
-            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 flex flex-col gap-5">
-              <div className="flex items-center gap-5">
+            <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 max-w-xl mx-auto gap-5">
+              <div className="flex flex-col items-center gap-5">
                 {/* Shield icon ring */}
                 <div className="relative flex-shrink-0">
                   <div className="w-16 h-16 rounded-full bg-pink-600/20 border border-pink-500/30 flex items-center justify-center">
@@ -183,28 +183,31 @@ export default function WhyChooseUs() {
                       <ShieldIcon />
                     </div>
                   </div>
+
                   {/* Glow ring */}
                   <div className="absolute inset-0 rounded-full blur-md bg-pink-500/20 -z-10" />
                 </div>
 
-                <div>
-                  <p className="open-sans text-pink-400 font-semibold tracking-wider uppercase">
+                <div className="text-center">
+                  <p className="open-sans text-pink-400 font-semibold text-sm tracking-wider uppercase">
                     Trusted by Businesses
                   </p>
-                  <p className="roboto text-white text-3xl font-extrabold tracking-tight leading-none my-2">
+
+                  <p className="roboto text-white text-2xl font-extrabold tracking-tight leading-none my-2">
                     12+ Years
                   </p>
-                  <p className="open-sans text-slate-400 text-lg">Industry Experience</p>
+
+                  <p className="open-sans text-slate-400">Industry Experience</p>
                 </div>
               </div>
 
               {/* Divider */}
-              <div className="h-px bg-white/10" />
+              <div className="h-px bg-white/10 my-2" />
 
               {/* Tags */}
               <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4 gap-2 text-slate-300">
                 {["Technology", "E-Commerce", "Digital Growth"].map((tag) => (
-                  <span key={tag} className="flex items-center gap-2 text-lg open-sans">
+                  <span key={tag} className="flex justify-center items-center gap-2 open-sans">
                     <span className="w-1.5 h-1.5 rounded-full bg-pink-500 flex-shrink-0" />
                     {tag}
                   </span>
@@ -213,7 +216,7 @@ export default function WhyChooseUs() {
             </div>
 
             {/* Feature cards row */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {features.map(({ id, Icon, title, desc }) => (
                 <div
                   key={id}
@@ -245,7 +248,7 @@ export default function WhyChooseUs() {
 
         {/* ── Bottom stats bar ── */}
         <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm px-4 py-6 mt-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 md:gap-6 gap-4">
             {stats.map(({ Icon, value, label }) => (
 
               <div key={label} className="flex items-center gap-2">

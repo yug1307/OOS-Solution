@@ -32,7 +32,7 @@ export default function Clients() {
         {/* ── Header ── */}
         <div className="text-center">
 
-          {/* Eyebrow tag */}
+          {/* Eyebrow tag */} 
           <div className="open-sans inline-flex items-center gap-2 bg-pink-400/10 border border-pink-400/20 rounded-full px-4 py-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse" />
             <span className="text-pink-400 text-xs font-semibold tracking-widest uppercase">
@@ -40,7 +40,7 @@ export default function Clients() {
             </span>
           </div>
  
-          <h2 className="roboto text-white text-4xl sm:text-4xl font-semibold leading-tight my-5">
+          <h2 className="roboto text-4xl sm:text-4xl text-white text-center font-extrabold leading-tight tracking-tight my-5">
             We Work With The{" "}
             <span className="text-pink-400">Best Platforms</span>
           </h2>
@@ -58,15 +58,15 @@ export default function Clients() {
           {gallery.map((pic, index) => (
             <div
               key={index}
-              className="group relative py-3 flex flex-col items-center justify-center gap-3 rounded-xl cursor-pointer transition-all duration-300 hover:border-amber-400/40 hover:-translate-y-1"
+              className="border rounded-xl group relative py-2 flex flex-col items-center justify-center gap-3 rounded-xl cursor-pointer transition-all duration-300 hover:border-amber-400/40 hover:-translate-y-1"
             >
 
-              {/* Logo */}
+              {/* Logo */} 
               <div className="relative flex items-center justify-center h-10">
                 <img
                   src={pic.imgSrc}
                   alt={pic.name}
-                  className="h-12 w-auto object-contain filter transition-all duration-300 group-hover:scale-110"
+                  className="h-10 w-[150px] object-contain filter transition-all duration-300 group-hover:scale-110"
                 />
               </div>
 
