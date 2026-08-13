@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Header from './Header'
 import Footer from './Footer'
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -24,36 +26,31 @@ const ContactPage = () => {
     setError('');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError('');
+  
+  try {
+    const docRef = await addDoc(collection(db, 'contacts'), {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      subject: formData.subject,
+      message: formData.message,
+      createdAt: new Date(),
+    });
     
-    try {
-      const response = await fetch('http://localhost:5000/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        setSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-        setTimeout(() => setSubmitted(false), 5000);
-      } else {
-        setError(data.message || 'Failed to submit form. Please check your input and try again.');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setError('Unable to connect to server. Please ensure the backend is running on http://localhost:5000');
-    } finally {
-      setLoading(false);
-    }
-  };
+    setSubmitted(true);
+    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    setTimeout(() => setSubmitted(false), 5000);
+  } catch (error) {
+    console.error('Error:', error);
+    setError('Failed to submit form. Please try again.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>

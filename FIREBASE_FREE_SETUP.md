@@ -15,7 +15,7 @@ Firebase is Google's backend platform that gives you:
 
 ## Why Firebase for Free?
 
-✓ Completely free
+✓ Completely free 
 ✓ No server to manage
 ✓ Database included
 ✓ Real-time data updates

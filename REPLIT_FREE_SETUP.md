@@ -30,7 +30,7 @@ Replit is an online IDE where you can:
 
 1. Click "Create Repl"
 2. Click "Import from GitHub"
-3. Paste your repo URL:
+3. Paste your repo URL: 
    ```
    https://github.com/YourUsername/ARC-Technologies
    ```
