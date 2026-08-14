@@ -127,16 +127,16 @@ const Testimonials = () => {
       </div>
       
       {/* CTA */} 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-violet-600 py-10 px-5 rounded-lg"
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-violet-600 py-8 px-5 rounded-lg"
         style={{ background: "linear-gradient(135deg, #4a109b 0%, #670dbc 30%, #F544A8 100%)" }}>
       
-        <div className="roboto md:text-left text-center text-white/100">    
-          <h2 className="text-2xl">Ready to Grow Your Business?</h2>
-          <p className="text-lg text-gray-300">Let's build something amazing together.</p>
+        <div className="roboto md:text-left text-center text-white/100 text-lg">    
+          <h2 className="">Ready to Grow Your Business?</h2>
+          <p className="text-gray-300">Let's build something amazing together.</p>
         </div>
               
         <div className="open-sans flex justify-center">
-          <Link to="/contact" className="flex py-3 justify-center border w-48 rounded-md">
+          <Link to="/contact" className="flex py-3 justify-center border w-40 rounded-md">
             <div className="text-white flex items-center justify-center gap-2 font-semibold">Learn More <FaArrowRight/></div>
           </Link>
         </div> 
